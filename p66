@@ -1,4 +1,6 @@
+#include"pch.h"
 #include<iostream>
+#include<cstdio>
 #include<map>
 using namespace std;
 
@@ -6,51 +8,98 @@ int main()
 {
 	multimap<int, int> mp;
 	mp.insert(make_pair(1000000000, 1));
-	map<int, int>::iterator it;
-
+	multimap<int, int>::iterator it;
+	
+	freopen("C:\\Users\\Master\\Desktop\\in.txt","r",stdin);
 	int n;
 	cin >> n;
 	for (int i = 0; i < n; i++)
 	{
-		map<int, int>::iterator left = mp.begin();
-		map<int, int>::iterator right = mp.end();
+		multimap<int, int>::iterator left = mp.begin();
+		multimap<int, int>::iterator right = mp.end();
+		multimap<int, int>::iterator last = mp.end();
+		last--;
 		int a, b;
 		cin >> a >> b;
-		
+
 		it = mp.lower_bound(b);
 
 		if (it == left)
-			cout << a << " " << it->second << endl;
+		{
+			int t = it->first;
+			int min = it->second;
+			it++;
+			while ( it != right && it->first == t)
+			{
+				if (min > it->second)
+					min = it->second;
+				it++;
+			}
+			cout << a << " " << min << endl;
+		}
+			
 		else if (it == right)
 		{
 			//modify
+			
 			it--;
 			int t = it->first;
-			it = mp.lower_bound(t);
-			cout << a << " " << it->second << endl;
+			int min = it->second;
+			it--;
+			while (it != right && it->first == t)
+			{
+				if (min > it->second)
+					min = it->second;
+				it--;
+			}
+			cout << a << " " << min << endl;
 		}
 		else
 		{
 			//modify
 			if (b == it->first)
-				cout << a << " " << it->second << endl;
+			{
+				int min = it->second;
+				it++;
+				while (it != right && it->first == b)
+				{
+					if (min > it->second)
+						min = it->second;
+					it++;
+				}
+				cout << a << " " << min << endl;
+			}
+				
 			else
 			{
+				multimap<int, int>::iterator p = it;
 				int m1, m2, n1, n2;
 				m1 = it->first;
 				n1 = it->second;
-				it--;
-				int t = it->first;
-				it = mp.lower_bound(t);
-				m2 = it->first;
-				n2 = it->second;
+				p++;
+				while (p != right && p->first == m1)
+				{
+					if (n1 > p->second)
+						n1 = p->second;
+					p++;
+				}
+				p = it;
+				p--;
+				m2 = p->first;
+				n2 = p->second;
+				while (p != right && p->first == m2)
+				{
+					if (n2 > p->second)
+						n2 = p->second;
+					p--;
+				}
 				if (m1 - b == b - m2)
 				{
 					//modify
-					if(n1>n2)
-					cout << a << " " << n2 << endl;
+					if (n1 > n2)
+						cout << a << " " << n2 << endl;
 					else
-					cout << a << " " << n1 << endl;
+						cout << a << " " << n1 << endl;
 				}
 				else if (m1 - b < b - m2)
 				{

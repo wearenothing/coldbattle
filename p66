@@ -1,4 +1,6 @@
+#include"pch.h"
 #include<iostream>
+#include<cstdio>
 #include<map>
 using namespace std;
 
@@ -7,7 +9,8 @@ int main()
 	multimap<int, int> mp;
 	mp.insert(make_pair(1000000000, 1));
 	map<int, int>::iterator it;
-
+	
+	freopen("C:\\Users\\Master\\Desktop\\test.txt","r",stdin);
 	int n;
 	cin >> n;
 	for (int i = 0; i < n; i++)
@@ -16,11 +19,23 @@ int main()
 		map<int, int>::iterator right = mp.end();
 		int a, b;
 		cin >> a >> b;
-		
+
 		it = mp.lower_bound(b);
 
 		if (it == left)
-			cout << a << " " << it->second << endl;
+		{
+			int t = it->first;
+			int min = it->second;
+			it++;
+			while ( it != right && it->first == t)
+			{
+				if (min > it->second)
+					min = it->second;
+				it++;
+			}
+			cout << a << " " << min << endl;
+		}
+			
 		else if (it == right)
 		{
 			//modify
@@ -47,10 +62,10 @@ int main()
 				if (m1 - b == b - m2)
 				{
 					//modify
-					if(n1>n2)
-					cout << a << " " << n2 << endl;
+					if (n1 > n2)
+						cout << a << " " << n2 << endl;
 					else
-					cout << a << " " << n1 << endl;
+						cout << a << " " << n1 << endl;
 				}
 				else if (m1 - b < b - m2)
 				{
@@ -66,3 +81,4 @@ int main()
 		mp.insert(make_pair(b, a));
 	}
 }
+

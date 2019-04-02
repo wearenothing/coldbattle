@@ -38,11 +38,17 @@ int main()
 			
 		else if (it == right)
 		{
-			//modify
 			it--;
 			int t = it->first;
-			it = mp.lower_bound(t);
-			cout << a << " " << it->second << endl;
+			int min = it->second;
+			it--;
+			while (it != right && it->first == t)
+			{
+				if (min > it->second)
+					min = it->second;
+				it--;
+			}
+			cout << a << " " << min << endl;
 		}
 		else
 		{
@@ -81,4 +87,3 @@ int main()
 		mp.insert(make_pair(b, a));
 	}
 }
-

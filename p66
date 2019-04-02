@@ -14,8 +14,6 @@ int main()
 	{
 		multimap<int, int>::iterator left = mp.begin();
 		multimap<int, int>::iterator right = mp.end();
-		multimap<int, int>::iterator last = mp.end();
-		last--;
 		int a, b;
 		cin >> a >> b;
 
@@ -37,8 +35,6 @@ int main()
 			
 		else if (it == right)
 		{
-			//modify
-			
 			it--;
 			int t = it->first;
 			int min = it->second;
@@ -53,7 +49,6 @@ int main()
 		}
 		else
 		{
-			//modify
 			if (b == it->first)
 			{
 				int min = it->second;
@@ -83,8 +78,8 @@ int main()
 					it++;
 					while (it != right && it->first == m1)
 					{
-						if (n1 > p->second)
-							n1 = p->second;
+						if (n1 > it->second)
+							n1 = it->second;
 						it++;
 					}
 					p--;
@@ -104,8 +99,8 @@ int main()
 					it++;
 					while (it != right && it->first == m1)
 					{
-						if (n1 > p->second)
-							n1 = p->second;
+						if (n1 > it->second)
+							n1 = it->second;
 						it++;
 					}
 					cout << a << " " << n1 << endl;

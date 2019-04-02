@@ -64,7 +64,6 @@ int main()
 				
 			else
 			{
-				//modify,can it be faster if only one iterator be used?
 				multimap<int, int>::iterator p = it;
 				p--;
 				int m1, m2, n1, n2;
@@ -72,7 +71,7 @@ int main()
 				n1 = it->second;
 				m2 = p->first;
 				n2 = p->second;
-				
+
 				if (m1 - b == b - m2)
 				{
 					it++;
@@ -83,10 +82,10 @@ int main()
 						it++;
 					}
 					p--;
-					while (p != right && p->first == m1)
+					while (p != right && p->first == m2)
 					{
-						if (n1 > p->second)
-							n1 = p->second;
+						if (n2 > p->second)
+							n2 = p->second;
 						p++;
 					}
 					if (n1 > n2)
@@ -108,10 +107,10 @@ int main()
 				else
 				{
 					p--;
-					while (p != right && p->first == m1)
+					while (p != right && p->first == m2)
 					{
-						if (n1 > p->second)
-							n1 = p->second;
+						if (n2 > p->second)
+							n2 = p->second;
 						p++;
 					}
 					cout << a << " " << n2 << endl;

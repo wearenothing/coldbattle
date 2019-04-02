@@ -1,6 +1,4 @@
-#include"pch.h"
 #include<iostream>
-#include<cstdio>
 #include<map>
 using namespace std;
 
@@ -10,7 +8,6 @@ int main()
 	mp.insert(make_pair(1000000000, 1));
 	multimap<int, int>::iterator it;
 	
-	freopen("C:\\Users\\Master\\Desktop\\in.txt","r",stdin);
 	int n;
 	cin >> n;
 	for (int i = 0; i < n; i++)

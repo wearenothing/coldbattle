@@ -1,5 +1,11 @@
+// p1.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include "pch.h"
 #include<iostream>
+#include<cstdio>
 #include<map>
+#include<fstream>
 using namespace std;
 
 int main()
@@ -7,7 +13,8 @@ int main()
 	multimap<int, int> mp;
 	mp.insert(make_pair(1000000000, 1));
 	map<int, int>::iterator it;
-
+	freopen("C:\\Users\\Master\\Downloads\\in.txt", "r", stdin);
+	fstream file("file.txt");
 	int n;
 	cin >> n;
 	for (int i = 0; i < n; i++)
@@ -16,24 +23,24 @@ int main()
 		map<int, int>::iterator right = mp.end();
 		int a, b;
 		cin >> a >> b;
-		
+
 		it = mp.lower_bound(b);
 
 		if (it == left)
-			cout << a << " " << it->second << endl;
+			file << a << " " << it->second << endl;
 		else if (it == right)
 		{
 			//modify
 			it--;
 			int t = it->first;
 			it = mp.lower_bound(t);
-			cout << a << " " << it->second << endl;
+			file << a << " " << it->second << endl;
 		}
 		else
 		{
 			//modify
 			if (b == it->first)
-				cout << a << " " << it->second << endl;
+				file << a << " " << it->second << endl;
 			else
 			{
 				int m1, m2, n1, n2;
@@ -47,22 +54,23 @@ int main()
 				if (m1 - b == b - m2)
 				{
 					//modify
-					if(n1>n2)
-					cout << a << " " << n2 << endl;
+					if (n1 > n2)
+						file << a << " " << n2 << endl;
 					else
-					cout << a << " " << n1 << endl;
+						file << a << " " << n1 << endl;
 				}
 				else if (m1 - b < b - m2)
 				{
-					cout << a << " " << n1 << endl;
+					file << a << " " << n1 << endl;
 				}
 				else
 				{
-					cout << a << " " << n2 << endl;
+					file << a << " " << n2 << endl;
 				}
 
 			}
 		}
 		mp.insert(make_pair(b, a));
 	}
+	file.close();
 }

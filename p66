@@ -88,9 +88,9 @@ int main()
 						p--;
 					}
 					if (n1 > n2)
-						file << a << " " << n2 << endl;
+						cout << a << " " << n2 << endl;
 					else
-						file << a << " " << n1 << endl;
+						cout << a << " " << n1 << endl;
 				}
 				else if (m1 - b < b - m2)
 				{
@@ -101,7 +101,7 @@ int main()
 							n1 = it->second;
 						it++;
 					}
-					file << a << " " << n1 << endl;
+					cout << a << " " << n1 << endl;
 				}
 				else
 				{
@@ -112,7 +112,7 @@ int main()
 							n2 = p->second;
 						p--;
 					}
-					file << a << " " << n2 << endl;
+					cout << a << " " << n2 << endl;
 				}
 
 			}

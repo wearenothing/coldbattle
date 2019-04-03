@@ -14,8 +14,6 @@ int main()
 	{
 		multimap<int, int>::iterator left = mp.begin();
 		multimap<int, int>::iterator right = mp.end();
-		multimap<int, int>::iterator last = mp.end();
-		last--;
 		int a, b;
 		cin >> a >> b;
 
@@ -37,8 +35,6 @@ int main()
 			
 		else if (it == right)
 		{
-			//modify
-			
 			it--;
 			int t = it->first;
 			int min = it->second;
@@ -53,7 +49,6 @@ int main()
 		}
 		else
 		{
-			//modify
 			if (b == it->first)
 			{
 				int min = it->second;
@@ -70,29 +65,29 @@ int main()
 			else
 			{
 				multimap<int, int>::iterator p = it;
+				p--;
 				int m1, m2, n1, n2;
 				m1 = it->first;
 				n1 = it->second;
-				p++;
-				while (p != right && p->first == m1)
-				{
-					if (n1 > p->second)
-						n1 = p->second;
-					p++;
-				}
-				p = it;
-				p--;
 				m2 = p->first;
 				n2 = p->second;
-				while (p != right && p->first == m2)
-				{
-					if (n2 > p->second)
-						n2 = p->second;
-					p--;
-				}
+
 				if (m1 - b == b - m2)
 				{
-					//modify
+					it++;
+					while (it != right && it->first == m1)
+					{
+						if (n1 > it->second)
+							n1 = it->second;
+						it++;
+					}
+					p--;
+					while (p != right && p->first == m2)
+					{
+						if (n2 > p->second)
+							n2 = p->second;
+						p--;
+					}
 					if (n1 > n2)
 						cout << a << " " << n2 << endl;
 					else
@@ -100,10 +95,24 @@ int main()
 				}
 				else if (m1 - b < b - m2)
 				{
+					it++;
+					while (it != right && it->first == m1)
+					{
+						if (n1 > it->second)
+							n1 = it->second;
+						it++;
+					}
 					cout << a << " " << n1 << endl;
 				}
 				else
 				{
+					p--;
+					while (p != right && p->first == m2)
+					{
+						if (n2 > p->second)
+							n2 = p->second;
+						p--;
+					}
 					cout << a << " " << n2 << endl;
 				}
 

@@ -64,6 +64,7 @@ int main()
 				
 			else
 			{
+				multimap<int, int>::iterator p = it;
 				p--;
 				int m1, m2, n1, n2;
 				m1 = it->first;

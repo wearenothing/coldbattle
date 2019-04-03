@@ -1,7 +1,4 @@
-// p1.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-#include "pch.h"
+#include"pch.h"
 #include<iostream>
 #include<cstdio>
 #include<map>
@@ -12,48 +9,90 @@ int main()
 {
 	multimap<int, int> mp;
 	mp.insert(make_pair(1000000000, 1));
-	map<int, int>::iterator it;
-	freopen("C:\\Users\\Master\\Downloads\\in.txt", "r", stdin);
+	multimap<int, int>::iterator it;
 	fstream file("file.txt");
+	freopen("C:\\Users\\Master\\Desktop\\in.txt","r",stdin);
 	int n;
 	cin >> n;
 	for (int i = 0; i < n; i++)
 	{
-		map<int, int>::iterator left = mp.begin();
-		map<int, int>::iterator right = mp.end();
+		multimap<int, int>::iterator left = mp.begin();
+		multimap<int, int>::iterator right = mp.end();
 		int a, b;
 		cin >> a >> b;
-
+		if (a == 2288250)
+			cout << endl;
 		it = mp.lower_bound(b);
-
 		if (it == left)
-			file << a << " " << it->second << endl;
+		{
+			int t = it->first;
+			int min = it->second;
+			it++;
+			while ( it != right && it->first == t)
+			{
+				if (min > it->second)
+					min = it->second;
+				it++;
+			}
+			file << a << " " << min << endl;
+		}
+			
 		else if (it == right)
 		{
-			//modify
 			it--;
 			int t = it->first;
-			it = mp.lower_bound(t);
-			file << a << " " << it->second << endl;
+			int min = it->second;
+			it--;
+			while (it != right && it->first == t)
+			{
+				if (min > it->second)
+					min = it->second;
+				it--;
+			}
+			file << a << " " << min << endl;
 		}
 		else
 		{
-			//modify
 			if (b == it->first)
-				file << a << " " << it->second << endl;
+			{
+				int min = it->second;
+				it++;
+				while (it != right && it->first == b)
+				{
+					if (min > it->second)
+						min = it->second;
+					it++;
+				}
+				file << a << " " << min << endl;
+			}
+				
 			else
 			{
+				//modify,can it be faster if only one iterator be used?
+				multimap<int, int>::iterator p = it;
+				p--;
 				int m1, m2, n1, n2;
 				m1 = it->first;
 				n1 = it->second;
-				it--;
-				int t = it->first;
-				it = mp.lower_bound(t);
-				m2 = it->first;
-				n2 = it->second;
+				m2 = p->first;
+				n2 = p->second;
+
 				if (m1 - b == b - m2)
 				{
-					//modify
+					it++;
+					while (it != right && it->first == m1)
+					{
+						if (n1 > it->second)
+							n1 = it->second;
+						it++;
+					}
+					p--;
+					while (p != right && p->first == m2)
+					{
+						if (n2 > p->second)
+							n2 = p->second;
+						p--;
+					}
 					if (n1 > n2)
 						file << a << " " << n2 << endl;
 					else
@@ -61,13 +100,26 @@ int main()
 				}
 				else if (m1 - b < b - m2)
 				{
+					it++;
+					while (it != right && it->first == m1)
+					{
+						if (n1 > it->second)
+							n1 = it->second;
+						it++;
+					}
 					file << a << " " << n1 << endl;
 				}
 				else
 				{
+					p--;
+					while (p != right && p->first == m2)
+					{
+						if (n2 > p->second)
+							n2 = p->second;
+						p--;
+					}
 					file << a << " " << n2 << endl;
 				}
-
 			}
 		}
 		mp.insert(make_pair(b, a));

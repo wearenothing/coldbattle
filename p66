@@ -64,7 +64,6 @@ int main()
 				
 			else
 			{
-				multimap<int, int>::iterator p = it;
 				p--;
 				int m1, m2, n1, n2;
 				m1 = it->first;
@@ -86,12 +85,12 @@ int main()
 					{
 						if (n2 > p->second)
 							n2 = p->second;
-						p++;
+						p--;
 					}
 					if (n1 > n2)
-						cout << a << " " << n2 << endl;
+						file << a << " " << n2 << endl;
 					else
-						cout << a << " " << n1 << endl;
+						file << a << " " << n1 << endl;
 				}
 				else if (m1 - b < b - m2)
 				{
@@ -102,7 +101,7 @@ int main()
 							n1 = it->second;
 						it++;
 					}
-					cout << a << " " << n1 << endl;
+					file << a << " " << n1 << endl;
 				}
 				else
 				{
@@ -111,9 +110,9 @@ int main()
 					{
 						if (n2 > p->second)
 							n2 = p->second;
-						p++;
+						p--;
 					}
-					cout << a << " " << n2 << endl;
+					file << a << " " << n2 << endl;
 				}
 
 			}
